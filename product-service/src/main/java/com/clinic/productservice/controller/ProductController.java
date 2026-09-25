@@ -18,7 +18,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable Long id) {
+    public Product getProduct(@PathVariable Long id) throws InterruptedException {
+        Thread.sleep(10000);
         return repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Product not found"));

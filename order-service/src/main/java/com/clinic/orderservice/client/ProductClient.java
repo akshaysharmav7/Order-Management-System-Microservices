@@ -1,6 +1,8 @@
 package com.clinic.orderservice.client;
 
 import com.clinic.orderservice.dto.ProductResponse;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -15,6 +17,11 @@ public class ProductClient {
                 .build();
     }
 
+    @CircuitBreaker(
+            name = "productService",
+            fallbackMethod = "productServiceFallback"
+    )
+    @Retry(name = "productService")
     public ProductResponse getProduct(Long productId){
         return restClient
                 .get()
