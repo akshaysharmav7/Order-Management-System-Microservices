@@ -20,6 +20,8 @@ public class OrderController {
 
     @PostMapping
     public Order createOrder(@RequestBody CreateOrderRequest request) {
+
+        System.out.println("Creating order for product: " + request.productId());
         return orderService.createOrder(request);
     }
 }

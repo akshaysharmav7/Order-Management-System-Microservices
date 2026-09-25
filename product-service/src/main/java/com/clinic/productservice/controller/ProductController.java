@@ -19,6 +19,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public Product getProduct(@PathVariable Long id) throws InterruptedException {
+        System.out.println("Fetching product: " + id);
         Thread.sleep(10000);
         return repository.findById(id)
                 .orElseThrow(() ->
